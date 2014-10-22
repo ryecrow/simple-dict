@@ -2,9 +2,10 @@ package com.young.simpledict.service;
 
 import com.young.common.YLog;
 import com.young.simpledict.dict.DictAdapter;
-import com.young.simpledict.dict.YoudaoDictAdapter;
+import com.young.simpledict.dict.YoudaoBriefDictAdapter;
+import com.young.simpledict.dict.YoudaoDetailDictAdapter;
 import com.young.simpledict.service.event.SearchWordResponse;
-import com.young.simpledict.service.model.DictDetail;
+import com.young.simpledict.dict.model.DictDetail;
 import de.greenrobot.event.EventBus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -20,13 +21,12 @@ import java.util.concurrent.Callable;
  */
 public class HttpRequestTask implements Callable<DictDetail> {
     private static final String TAG = "HttpRequestTask";
-    public static final int DICT_YOUDAO = 0;
 
     private String mWordToSearch;
     private DictAdapter mDictAdapter;
 
     public HttpRequestTask(String wordToSearch) {
-        this(wordToSearch, DICT_YOUDAO);
+        this(wordToSearch, DictAdapter.DICT_YOUDAO_BRIEF);
     }
 
     public HttpRequestTask(String wordToSearch, int useDict) {
@@ -35,8 +35,11 @@ public class HttpRequestTask implements Callable<DictDetail> {
         }
         mWordToSearch = wordToSearch;
         switch (useDict) {
+            case DictAdapter.DICT_YOUDAO_DETAIL:
+                mDictAdapter = new YoudaoDetailDictAdapter();
+                break;
             default:
-                mDictAdapter = new YoudaoDictAdapter();
+                mDictAdapter = new YoudaoBriefDictAdapter();
         }
 
     }

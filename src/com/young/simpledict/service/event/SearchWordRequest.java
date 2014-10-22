@@ -8,4 +8,8 @@ package com.young.simpledict.service.event;
  */
 public class SearchWordRequest extends BaseEvent {
    public String word;
+   /**
+    * use which dict, line {@link com.young.simpledict.dict.DictAdapter#DICT_YOUDAO_BRIEF}
+    */
+   public int useDict;
 }

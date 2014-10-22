@@ -1,6 +1,6 @@
 package com.young.simpledict.dict;
 
-import com.young.simpledict.service.model.DictDetail;
+import com.young.simpledict.dict.model.DictDetail;
 
 /**
  * Author: taylorcyang
@@ -9,6 +9,10 @@ import com.young.simpledict.service.model.DictDetail;
  * Life with passion. Code with creativity!
  */
 public interface DictAdapter {
+    public static final int DICT_YOUDAO_BRIEF = 0;
+    public static final int DICT_YOUDAO_DETAIL = 1;
+
     public String getSearchUri(String mWordToSearch);
+
     public DictDetail parseDict(String response);
 }

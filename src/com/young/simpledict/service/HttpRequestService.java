@@ -22,7 +22,7 @@ public class HttpRequestService {
     }
 
     public void onEvent(SearchWordRequest request) {
-        mThreadPool.submit(new HttpRequestTask(request.word));
+        mThreadPool.submit(new HttpRequestTask(request.word, request.useDict));
     }
 
     public void onEvent(OnApplicationTerminateEvent e) {

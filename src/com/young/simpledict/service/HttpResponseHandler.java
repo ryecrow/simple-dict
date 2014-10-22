@@ -2,7 +2,7 @@ package com.young.simpledict.service;
 
 import com.young.common.YLog;
 import com.young.simpledict.dict.DictAdapter;
-import com.young.simpledict.service.model.DictDetail;
+import com.young.simpledict.dict.model.DictDetail;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

@@ -1,6 +1,6 @@
 package com.young.simpledict.service.event;
 
-import com.young.simpledict.service.model.DictDetail;
+import com.young.simpledict.dict.model.DictDetail;
 
 /**
  * Author: taylorcyang
