@@ -34,8 +34,9 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
             if (json.has("ec")) {
                 parseDict(json.getJSONObject("ec"), d);
             }
+            parseDict(json, d);
         } catch (JSONException e) {
-            YLog.i(TAG, "parse response json failed", e);
+            YLog.v(TAG, "parse response json failed", e);
         }
         return d;
     }
@@ -48,8 +49,8 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
                 for (int i = 0; i < word.length(); i++) {
                     JSONObject o = word.getJSONObject(i);
                     if (o.has("phone")) d.pinyin = o.getString("phone");
-                    if (o.has("usphone")) d.usphontic = o.getString("usphone");
-                    if (o.has("ukphone")) d.ukphontic = o.getString("ukphone");
+                    if (o.has("usphone")) d.usphonetic = o.getString("usphone");
+                    if (o.has("ukphone")) d.ukphonetic = o.getString("ukphone");
                     if (o.has("usspeech")) d.usspeech = o.getString("usspeech") == null ?
                             null : "http://dict.youdao.com/dictvoice?audio=" +
                             o.getString("usspeech");
@@ -58,7 +59,7 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
                             o.getString("ukspeech");
                 }
             } catch (Exception e) {
-                YLog.i(TAG, "parse header failed", e);
+                YLog.v(TAG, "parse header failed", e);
             }
         }
     }
@@ -115,7 +116,7 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
                     }
                 }
             } catch (Exception e) {
-                YLog.i(TAG, "Parse dictionary failed", e);
+                YLog.v(TAG, "Parse dictionary failed", e);
             }
 
         }
@@ -132,4 +133,5 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
             }
         }
     }
+
 }

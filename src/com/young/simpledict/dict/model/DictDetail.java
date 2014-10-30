@@ -10,11 +10,13 @@ import java.util.ArrayList;
  */
 public class DictDetail {
     public String word;
-    public String usphontic;
-    public String usspeech;
-    public String ukphontic;
-    public String ukspeech;
     public String pinyin;
+    public String usphonetic;
+    public String usspeech;
+    public String ukphonetic;
+    public String ukspeech;
+
+    public Wiki wiki;
 
     public ArrayList<DictExplain> explains = new ArrayList<DictExplain>();
     public ArrayList<AudioSentence> audioSentences = new ArrayList<AudioSentence>();

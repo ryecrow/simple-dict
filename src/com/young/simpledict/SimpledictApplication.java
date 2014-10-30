@@ -22,8 +22,7 @@ public class SimpledictApplication extends Application {
     }
 
     private void initApplication() {
-        GlobalContext.getRequestService();
-
+        GlobalContext.init();
     }
 
     @Override

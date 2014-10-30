@@ -2,6 +2,7 @@ package com.young.simpledict.dict;
 
 import com.young.common.YLog;
 import com.young.simpledict.dict.model.AudioSentence;
+import com.young.simpledict.dict.model.Wiki;
 import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.dict.model.TranslateSentence;
 import org.json.JSONArray;
@@ -43,8 +44,7 @@ public class YoudaoDetailDictAdapter extends YoudaoBriefDictAdapter {
             } catch (JSONException e) {
 
             }
-
-
+            parseBaike(json, d);
         } catch (JSONException e) {
             YLog.i(TAG, "parse response json failed", e);
         }
@@ -64,7 +64,6 @@ public class YoudaoDetailDictAdapter extends YoudaoBriefDictAdapter {
                 as.audioLength = n.getString("speech-size");
                 d.audioSentences.add(as);
             } catch (Exception e) {
-
             }
         }
     }
@@ -83,5 +82,28 @@ public class YoudaoDetailDictAdapter extends YoudaoBriefDictAdapter {
 
             }
         }
+    }
+
+
+    protected void parseBaike(JSONObject json, DictDetail d) {
+        if (json == null || d == null) {
+            return;
+        }
+        try {
+            JSONObject obj = json.getJSONObject("baike");
+            JSONObject source = obj.getJSONObject("source");
+            Wiki b = new Wiki();
+            b.sourceName = source.getString("name");
+            b.sourceURL = source.getString("url");
+            JSONArray summarys = obj.getJSONArray("summarys");
+            for (int i = 0; i < summarys.length(); i++) {
+                JSONObject sum = summarys.getJSONObject(i);
+                b.summary.add(sum.getString("summary"));
+            }
+            d.wiki = b;
+        } catch (JSONException e) {
+
+        }
+
     }
 }

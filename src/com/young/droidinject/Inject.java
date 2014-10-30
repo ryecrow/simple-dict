@@ -13,14 +13,16 @@ import java.lang.reflect.Field;
 public class Inject {
     public static void inject(Activity o) {
         Field[] fields = o.getClass().getDeclaredFields();
-        for(Field f: fields) {
+        for (Field f : fields) {
             InjectView iv = f.getAnnotation(InjectView.class);
             if (iv != null) {
                 try {
                     f.setAccessible(true);
                     f.set(o, o.findViewById(iv.value()));
-                }catch (IllegalAccessException e) {
+                } catch (IllegalAccessException e) {
 
+                } catch (IllegalArgumentException ex) {
+                    throw new IllegalArgumentException("Type of View in xml and declared class is not compatible!");
                 }
             }
         }

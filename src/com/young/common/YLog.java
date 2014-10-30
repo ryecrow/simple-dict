@@ -9,6 +9,10 @@ import android.util.Log;
  * Life with passion. Code with creativity!
  */
 public class YLog {
+    public static void v(String tag, String msg) {
+        Log.v(tag, msg);
+    }
+
     public static void d(String tag, String msg) {
         Log.d(tag, msg);
     }
@@ -28,6 +32,10 @@ public class YLog {
 
     public static void wtf(String tag, String msg) {
         Log.wtf(tag, msg);
+    }
+
+    public static void v(String tag, String msg, Throwable t) {
+        Log.v(tag, msg, t);
     }
 
     public static void d(String tag, String msg, Throwable t) {

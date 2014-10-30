@@ -1,30 +1,28 @@
 package com.young.simpledict.homepage.ui;
 
-import android.app.Activity;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import com.young.common.YLog;
 import com.young.droidinject.Inject;
 import com.young.droidinject.InjectView;
 import com.young.simpledict.R;
+import com.young.simpledict.detailpage.ui.DetailFragment;
 import com.young.simpledict.dict.DictAdapter;
-import com.young.simpledict.dict.model.AudioSentence;
-import com.young.simpledict.dict.model.DictExplain;
-import com.young.simpledict.dict.model.TranslateSentence;
+import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
-import com.young.simpledict.dict.model.DictDetail;
 import de.greenrobot.event.EventBus;
 
-public class DictActivity extends Activity implements View.OnClickListener {
+public class DictActivity extends FragmentActivity
+        implements View.OnClickListener, SensorEventListener {
     private static final String TAG = "DictActivity";
-
-    @InjectView(R.id.display_area)
-    TextView mDisplayTextView;
 
     @InjectView(R.id.search_box)
     EditText mSearchBox;
@@ -32,30 +30,36 @@ public class DictActivity extends Activity implements View.OnClickListener {
     @InjectView(R.id.search_button)
     Button mSearchButton;
 
+    private DetailFragment mDictDetailFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dict_activity);
         Inject.inject(this);
         mSearchButton.setOnClickListener(this);
-    }
+            mDictDetailFragment = new DetailFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.dict_detail_fragment, mDictDetailFragment)
+                    .commit();
+        }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        EventBus.getDefault().register(this);
-    }
+        @Override
+        protected void onResume() {
+            super.onResume();
+            EventBus.getDefault().register(this);
+        }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
+        @Override
+        protected void onPause() {
+            super.onPause();
+            EventBus.getDefault().unregister(this);
+        }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
             case R.id.search_button:
                 SearchWordRequest req = new SearchWordRequest();
                 req.useDict = DictAdapter.DICT_YOUDAO_DETAIL;
@@ -67,36 +71,19 @@ public class DictActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void onEventMainThread(SearchWordResponse response) {
+    public void onEventMainThread(@NonNull SearchWordResponse response) {
         DictDetail info = response.dictDetail;
-        if (info != null) {
-            StringBuffer sb = new StringBuffer();
-            if (info.usphontic != null) {
-                sb.append("US: /").append(info.usphontic).append("/<br/>");
-            }
-            if (info.ukphontic != null) {
-                sb.append("UK: /").append(info.ukphontic).append("/<br/>");
-            }
-            for (DictExplain de : info.explains) {
-                for (String s : de.trs) {
-                    sb.append(s).append("<br/>");
-                }
-                for (DictExplain.WF w : de.wfs) {
-                    sb.append(w.name).append(':').append(w.value).append("<br/>");
-                }
-            }
-            for (AudioSentence as : info.audioSentences) {
-                sb.append(as.audioLength).append(" ")
-                        .append(as.sentence).append("<br/>\t")
-                        .append(as.sentenceAudioUrl).append("<br/>");
-            }
-            for(TranslateSentence ts: info.translateSentences) {
-                sb.append(ts.source).append(' ').append(ts.sentence).append("<br/>\t")
-                        .append(ts.translate).append("<br/>");
-            }
-
-            mDisplayTextView.setText(Html.fromHtml(sb.toString()));
-        }
+        mDictDetailFragment.setData(info);
         YLog.i(TAG, info.word);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

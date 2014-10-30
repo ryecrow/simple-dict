@@ -7,9 +7,22 @@ package com.young.simpledict.service.event;
  * Life with passion. Code with creativity!
  */
 public class BaseEvent {
-    Object eventCode;
+    public Object eventCode;
+
+    public BaseEvent() {
+
+    }
+
+    public BaseEvent(Object eventCode) {
+        this.eventCode = eventCode;
+    }
+
     public BaseEvent setEventCode(Object code) {
         eventCode = code;
         return this;
+    }
+
+    public Object getEventCode() {
+        return eventCode;
     }
 }
