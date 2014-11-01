@@ -16,6 +16,5 @@ public class NetSoundRequest extends BaseEvent {
 
     public String soundUrl;
     public int requestCode = REQUEST_START;
-    public int mediaPlayerHandle = -1;
     public boolean releaseAllMediaPlayer = false;
 }

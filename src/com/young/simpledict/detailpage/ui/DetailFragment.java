@@ -43,6 +43,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private LinearLayout mRootContainer;
     private LayoutInflater mInflater;
     private DictDetail mDictDetail;
+    private SpeakersListener mSpeakersListener;
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -51,11 +52,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mSpeakersListener.register();
     }
 
     @Override
@@ -64,6 +67,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         NetSoundRequest req = new NetSoundRequest();
         req.releaseAllMediaPlayer = true;
         EventBus.getDefault().post(req);
+        mSpeakersListener.unRegister();
     }
 
     @Override
@@ -73,6 +77,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         mInflater = inflater;
         mRootScrollView = (ScrollView) inflater.inflate(R.layout.detail_fragment, container, false);
         mRootContainer = (LinearLayout) mRootScrollView.findViewById(R.id.dict_fragment_container);
+        mSpeakersListener = new SpeakersListener();
         return mRootScrollView;
     }
 
@@ -122,8 +127,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                     .setText(mDictDetail.usphonetic);
             ((TextView) root.findViewById(R.id.dict_header_ukphonetic))
                     .setText(mDictDetail.ukphonetic);
-            root.findViewById(R.id.dict_header_us_speech).setOnClickListener(new PlayNetSoundOnClickListener(mDictDetail.usspeech));
-            root.findViewById(R.id.dict_header_uk_speech).setOnClickListener(new PlayNetSoundOnClickListener(mDictDetail.ukspeech));
+            mSpeakersListener.addViewToListen(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
+            mSpeakersListener.addViewToListen(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
         }
 
         for (DictExplain de : mDictDetail.explains) {
@@ -183,7 +188,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         for (AudioSentence as : mDictDetail.audioSentences) {
             ViewGroup ll = (ViewGroup) mInflater.inflate(R.layout.audio_sentence, rootContainer, false);
             final String url = as.sentenceAudioUrl;
-            ll.findViewById(R.id.audio_sentence_speaker).setOnClickListener(new PlayNetSoundOnClickListener(as.sentenceAudioUrl));
+            mSpeakersListener.addViewToListen(ll.findViewById(R.id.audio_sentence_speaker), as.sentenceAudioUrl);
             ((TextView) ll.findViewById(R.id.audio_sentence_text)).setText(Html.fromHtml(as.sentence));
             rootContainer.addView(ll);
         }
@@ -225,23 +230,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             default:
 
-        }
-    }
-
-    public static class PlayNetSoundOnClickListener implements View.OnClickListener {
-        private String mSoundUrl;
-
-        public PlayNetSoundOnClickListener(String soudnUrl) {
-            mSoundUrl = soudnUrl;
-        }
-
-        @Override
-        public void onClick(View v) {
-            NetSoundRequest req = new NetSoundRequest();
-            req.requestCode = NetSoundRequest.REQUEST_START;
-            req.setEventCode(DetailFragment.class);
-            req.soundUrl = mSoundUrl;
-            EventBus.getDefault().post(req);
         }
     }
 }

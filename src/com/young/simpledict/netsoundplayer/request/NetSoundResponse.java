@@ -11,9 +11,8 @@ import com.young.simpledict.service.event.BaseEvent;
 public class NetSoundResponse extends BaseEvent {
     public static final int RESPONSE_PLAYING = 1;
     public static final int RESPONSE_PAUSED = 2;
-    public static final int RESPONSE_STOPPED = 3;
+    public static final int RESPONSE_COMPLETED = 3;
     public static final int RESPONSE_FAILED = -1;
 
     public int responseState;
-    public int mediaPlayerHandel;
 }

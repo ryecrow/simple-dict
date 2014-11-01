@@ -11,9 +11,13 @@ import java.util.ArrayList;
 public class DictDetail {
     public String word;
     public String pinyin;
+    //us phonetic
     public String usphonetic;
+    //us pronunciation url
     public String usspeech;
+    //uk phonetic
     public String ukphonetic;
+    //uk pronunication url
     public String ukspeech;
 
     public Wiki wiki;
