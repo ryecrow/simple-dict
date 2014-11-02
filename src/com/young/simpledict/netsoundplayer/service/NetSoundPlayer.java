@@ -20,7 +20,6 @@ import java.io.IOException;
 public class NetSoundPlayer {
     private static final String TAG = "NetSoundPlayer";
     private MediaPlayer mMediaPlayer;
-    private static final int MAX_MEDIA_PLAYER_POOL_SIZE = 3;
 
     public NetSoundPlayer() {
         EventBus.getDefault().register(this);
@@ -31,6 +30,7 @@ public class NetSoundPlayer {
             releaseMediaPlayer();
         } else if (request.requestCode == NetSoundRequest.REQUEST_START) {
             GetFileRequest getFileRequest = new GetFileRequest();
+            getFileRequest.setEventCode(request.getEventCode());
             getFileRequest.fileName = FileNameDigester.digest(request.soundUrl);
             getFileRequest.fileUrl = request.soundUrl;
             EventBus.getDefault().post(getFileRequest);

@@ -23,8 +23,6 @@ import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.dict.model.DictExplain;
 import com.young.simpledict.dict.model.TranslateSentence;
 import com.young.simpledict.dict.model.Wiki;
-import com.young.simpledict.netsoundplayer.request.NetSoundRequest;
-import de.greenrobot.event.EventBus;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -64,9 +62,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        NetSoundRequest req = new NetSoundRequest();
-        req.releaseAllMediaPlayer = true;
-        EventBus.getDefault().post(req);
+        mSpeakersListener.stopPlaying();
         mSpeakersListener.unRegister();
     }
 
@@ -127,8 +123,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                     .setText(mDictDetail.usphonetic);
             ((TextView) root.findViewById(R.id.dict_header_ukphonetic))
                     .setText(mDictDetail.ukphonetic);
-            mSpeakersListener.addViewToListen(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
-            mSpeakersListener.addViewToListen(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
+            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
+            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
         }
 
         for (DictExplain de : mDictDetail.explains) {
@@ -188,7 +184,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         for (AudioSentence as : mDictDetail.audioSentences) {
             ViewGroup ll = (ViewGroup) mInflater.inflate(R.layout.audio_sentence, rootContainer, false);
             final String url = as.sentenceAudioUrl;
-            mSpeakersListener.addViewToListen(ll.findViewById(R.id.audio_sentence_speaker), as.sentenceAudioUrl);
+            mSpeakersListener.addListenerToView(ll.findViewById(R.id.audio_sentence_speaker), as.sentenceAudioUrl);
             ((TextView) ll.findViewById(R.id.audio_sentence_text)).setText(Html.fromHtml(as.sentence));
             rootContainer.addView(ll);
         }

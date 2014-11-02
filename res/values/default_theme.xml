@@ -14,4 +14,11 @@
         <item name="android:layout_marginBottom">0dp</item>
         <item name="cardCornerRadius">2dp</item>
     </style>
+
+    <style name="dict_speaker">
+        <item name="android:layout_width">@dimen/dict_header_pronounce_speaker_size</item>
+        <item name="android:layout_height">@dimen/dict_header_pronounce_speaker_size</item>
+        <item name="android:src">@drawable/speaker2</item>
+        <item name="android:background">@drawable/speaker_background</item>
+    </style>
 </resources>
