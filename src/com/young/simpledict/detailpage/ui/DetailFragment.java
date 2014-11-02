@@ -119,12 +119,18 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             ((TextView) header.findViewById(R.id.cnphonetic)).setText(mDictDetail.pinyin);
         } else {
             YLog.i(TAG, "display english");
-            ((TextView) root.findViewById(R.id.dict_header_usphonetic))
-                    .setText(mDictDetail.usphonetic);
-            ((TextView) root.findViewById(R.id.dict_header_ukphonetic))
-                    .setText(mDictDetail.ukphonetic);
-            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
-            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
+            TextView us = (TextView) root.findViewById(R.id.dict_header_usphonetic);
+            us.setText(mDictDetail.usphonetic);
+            TextView uk = (TextView) root.findViewById(R.id.dict_header_ukphonetic);
+            uk.setText(mDictDetail.ukphonetic);
+            mSpeakersListener.addListenerToView(us, mDictDetail.usspeech);
+            mSpeakersListener.addListenerToView(uk, mDictDetail.ukspeech);
+            us.measure(0,0);
+            uk.measure(0,0);
+            int width = Math.max(us.getMeasuredWidth(), uk.getMeasuredWidth()) +
+                    (int)getActivity().getResources().getDimension(R.dimen.phonetic_padding);
+            us.setWidth(width);
+            uk.setWidth(width);
         }
 
         for (DictExplain de : mDictDetail.explains) {
@@ -183,7 +189,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         ViewGroup rootContainer = (ViewGroup) root.findViewById(R.id.dict_audio_sentence_container);
         for (AudioSentence as : mDictDetail.audioSentences) {
             ViewGroup ll = (ViewGroup) mInflater.inflate(R.layout.audio_sentence, rootContainer, false);
-            final String url = as.sentenceAudioUrl;
             mSpeakersListener.addListenerToView(ll.findViewById(R.id.audio_sentence_speaker), as.sentenceAudioUrl);
             ((TextView) ll.findViewById(R.id.audio_sentence_text)).setText(Html.fromHtml(as.sentence));
             rootContainer.addView(ll);

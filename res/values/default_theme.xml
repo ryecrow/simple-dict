@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="headlineFontAppearance">@style/headlineFontStyle</item>
+        <item name="titleFontAppearance">@style/titleFontStyle</item>
+        <item name="subheadFontAppearance">@style/subheadFontStyle</item>
+        <item name="bodyFontRegularAppearance">@style/bodyFontRegularStyle</item>
+        <item name="bodyFontBoldAppearance">@style/bodyFontBoldStyle</item>
 
+        <item name="colorPrimary">#3f51b5</item>
+        <item name="colorPrimaryDark">#303f9f</item>
+        <item name="toolbarStyle">@style/toolbar</item>
+
+    </style>
+
+    <style name="headlineFontStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="titleFontStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="subheadFontStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="bodyFontRegularStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@android:color/black</item>
+    </style>
+
+    <style name="bodyFontBoldStyle" parent="bodyFontRegularStyle">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="dict_detail_card">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
         <item name="android:layout_marginBottom">0dp</item>
         <item name="cardCornerRadius">2dp</item>
     </style>
@@ -20,5 +51,11 @@
         <item name="android:layout_height">@dimen/dict_header_pronounce_speaker_size</item>
         <item name="android:src">@drawable/speaker2</item>
         <item name="android:background">@drawable/speaker_background</item>
+    </style>
+
+    <style name="toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">?colorPrimary</item>
     </style>
 </resources>

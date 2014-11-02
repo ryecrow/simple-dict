@@ -5,7 +5,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
 import de.greenrobot.event.EventBus;
 
-public class DictActivity extends FragmentActivity
+public class DictActivity extends ActionBarActivity
         implements View.OnClickListener, SensorEventListener {
     private static final String TAG = "DictActivity";
 
@@ -30,6 +31,9 @@ public class DictActivity extends FragmentActivity
     @InjectView(R.id.search_button)
     Button mSearchButton;
 
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
+
     private DetailFragment mDictDetailFragment;
 
     @Override
@@ -37,29 +41,31 @@ public class DictActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dict_activity);
         Inject.inject(this);
+        setSupportActionBar(mToolbar);
         mSearchButton.setOnClickListener(this);
-            mDictDetailFragment = new DetailFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.dict_detail_fragment, mDictDetailFragment)
-                    .commit();
-        }
+        mDictDetailFragment = new DetailFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.dict_detail_fragment, mDictDetailFragment)
+                .commit();
+
+    }
 
 
-        @Override
-        protected void onResume() {
-            super.onResume();
-            EventBus.getDefault().register(this);
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
 
-        @Override
-        protected void onPause() {
-            super.onPause();
-            EventBus.getDefault().unregister(this);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
 
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.search_button:
                 SearchWordRequest req = new SearchWordRequest();
                 req.useDict = DictAdapter.DICT_YOUDAO_DETAIL;

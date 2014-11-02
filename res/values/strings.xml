@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DictActivity</string>
+    <string name="app_name">简约词典</string>
     <string name="usphonetic">美式发音：</string>
     <string name="ukphonetic">英式发音：</string>
     <string name="dict_header_pinyin_label">拼音：</string>

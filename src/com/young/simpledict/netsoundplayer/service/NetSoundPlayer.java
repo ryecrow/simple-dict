@@ -122,7 +122,9 @@ public class NetSoundPlayer {
     }
 
     public void releaseMediaPlayer() {
-        mMediaPlayer.release();
-        mMediaPlayer = null;
+        if (mMediaPlayer!=null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 }

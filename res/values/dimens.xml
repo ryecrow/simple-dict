@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dict_header_pronounce_speaker_size">25dp</dimen>
+    <dimen name="phonetic_padding">8sp</dimen>
     <dimen name="card_padding">10dp</dimen>
 </resources>

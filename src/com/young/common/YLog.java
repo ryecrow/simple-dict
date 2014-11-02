@@ -18,8 +18,7 @@ public class YLog {
     }
 
     public static void i(String tag, String msg) {
-        //FIXME
-        Log.e(tag, msg);
+        Log.i(tag, msg);
     }
 
     public static void w(String tag, String msg) {

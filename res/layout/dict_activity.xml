@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tool="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            tool:title="@string/app_name"
+            style="?toolbarStyle"
+            tool:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            />
 
     <LinearLayout
             android:id="@+id/dict_detail_fragment"
@@ -15,20 +23,30 @@
 
     </LinearLayout>
 
-
-    <EditText
-            android:id="@+id/search_box"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hello"
-            />
+            android:orientation="horizontal"
+            >
 
-    <Button
-            android:id="@+id/search_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="search"
-            />
+        <EditText
+                android:id="@+id/search_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="?subheadFontAppearance"
+                android:text="hello"
+                />
+
+        <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?subheadFontAppearance"
+                android:text="search"
+                />
+    </LinearLayout>
+
 
 </LinearLayout>
 
