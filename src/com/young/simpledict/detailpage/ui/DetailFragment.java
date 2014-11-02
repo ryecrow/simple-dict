@@ -119,12 +119,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             ((TextView) header.findViewById(R.id.cnphonetic)).setText(mDictDetail.pinyin);
         } else {
             YLog.i(TAG, "display english");
+            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
+            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
             TextView us = (TextView) root.findViewById(R.id.dict_header_usphonetic);
             us.setText(mDictDetail.usphonetic);
             TextView uk = (TextView) root.findViewById(R.id.dict_header_ukphonetic);
             uk.setText(mDictDetail.ukphonetic);
-            mSpeakersListener.addListenerToView(us, mDictDetail.usspeech);
-            mSpeakersListener.addListenerToView(uk, mDictDetail.ukspeech);
             us.measure(0,0);
             uk.measure(0,0);
             int width = Math.max(us.getMeasuredWidth(), uk.getMeasuredWidth()) +
