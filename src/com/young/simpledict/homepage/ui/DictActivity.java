@@ -92,9 +92,9 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     private class ProgressBarOperator {
-        private static final long MIN_SHOW_TIME = 1500L;
+        private static final long MIN_SHOW_TIME = 1300L;
         private long mLastShowTime;
-        private Handler mMainHanderl = new Handler(Looper.getMainLooper());
+        private Handler mMainHandler = new Handler(Looper.getMainLooper());
         private Runnable mProgressBarCanceler = new Runnable() {
             @Override
             public void run() {
@@ -106,7 +106,7 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
 
         public void show() {
             if (mWaitingProgressbar != null) {
-                mMainHanderl.removeCallbacks(mProgressBarCanceler);
+                mMainHandler.removeCallbacks(mProgressBarCanceler);
                 if (mWaitingProgressbar.getVisibility() != View.VISIBLE) {
                     mWaitingProgressbar.setVisibility(View.VISIBLE);
                 }
@@ -118,7 +118,7 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
             if (mWaitingProgressbar != null) {
                 long delayTime = MIN_SHOW_TIME - (SystemClock.uptimeMillis() - mLastShowTime);
                 if (delayTime > 0) {
-                    mMainHanderl.postDelayed(mProgressBarCanceler, delayTime);
+                    mMainHandler.postDelayed(mProgressBarCanceler, delayTime);
                 } else {
                     mProgressBarCanceler.run();
                 }
