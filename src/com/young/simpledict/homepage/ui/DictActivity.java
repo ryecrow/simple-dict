@@ -1,15 +1,16 @@
 package com.young.simpledict.homepage.ui;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import com.young.common.YLog;
 import com.young.droidinject.Inject;
 import com.young.droidinject.InjectView;
@@ -21,8 +22,7 @@ import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
 import de.greenrobot.event.EventBus;
 
-public class DictActivity extends ActionBarActivity
-        implements View.OnClickListener, SensorEventListener {
+public class DictActivity extends ActionBarActivity implements View.OnClickListener {
     private static final String TAG = "DictActivity";
 
     @InjectView(R.id.search_box)
@@ -33,6 +33,11 @@ public class DictActivity extends ActionBarActivity
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @InjectView(R.id.waiting_progressbar)
+    ProgressBar mWaitingProgressbar;
+
+    private ProgressBarOperator mProgressBarOperator = new ProgressBarOperator();
 
     private DetailFragment mDictDetailFragment;
 
@@ -47,7 +52,6 @@ public class DictActivity extends ActionBarActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.dict_detail_fragment, mDictDetailFragment)
                 .commit();
-
     }
 
 
@@ -71,6 +75,7 @@ public class DictActivity extends ActionBarActivity
                 req.useDict = DictAdapter.DICT_YOUDAO_DETAIL;
                 req.word = mSearchBox.getText().toString();
                 EventBus.getDefault().post(req);
+                mProgressBarOperator.show();
                 break;
             default:
 
@@ -78,18 +83,46 @@ public class DictActivity extends ActionBarActivity
     }
 
     public void onEventMainThread(@NonNull SearchWordResponse response) {
+        mProgressBarOperator.dismiss();
         DictDetail info = response.dictDetail;
+        long s = System.currentTimeMillis();
         mDictDetailFragment.setData(info);
+        YLog.i(TAG, "setData consuming time:" + (System.currentTimeMillis() - s));
         YLog.i(TAG, info.word);
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
+    private class ProgressBarOperator {
+        private static final long MIN_SHOW_TIME = 1500L;
+        private long mLastShowTime;
+        private Handler mMainHanderl = new Handler(Looper.getMainLooper());
+        private Runnable mProgressBarCanceler = new Runnable() {
+            @Override
+            public void run() {
+                if (mWaitingProgressbar != null) {
+                    mWaitingProgressbar.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
 
-    }
+        public void show() {
+            if (mWaitingProgressbar != null) {
+                mMainHanderl.removeCallbacks(mProgressBarCanceler);
+                if (mWaitingProgressbar.getVisibility() != View.VISIBLE) {
+                    mWaitingProgressbar.setVisibility(View.VISIBLE);
+                }
+                mLastShowTime = SystemClock.uptimeMillis();
+            }
+        }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+        public void dismiss() {
+            if (mWaitingProgressbar != null) {
+                long delayTime = MIN_SHOW_TIME - (SystemClock.uptimeMillis() - mLastShowTime);
+                if (delayTime > 0) {
+                    mMainHanderl.postDelayed(mProgressBarCanceler, delayTime);
+                } else {
+                    mProgressBarCanceler.run();
+                }
+            }
+        }
     }
 }

@@ -33,6 +33,8 @@ public class FileNameDigester {
         for (Byte b : raw) {
             f.format("%02x", b & 0xff);
         }
-        return f.toString();
+      String ret = f.toString();
+        f.close();
+        return ret;
     }
 }

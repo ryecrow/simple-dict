@@ -13,6 +13,16 @@
             tool:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             />
 
+
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+            android:id="@+id/waiting_progressbar"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            />
+
     <LinearLayout
             android:id="@+id/dict_detail_fragment"
             android:layout_width="match_parent"
@@ -20,7 +30,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             >
-
     </LinearLayout>
 
     <LinearLayout
