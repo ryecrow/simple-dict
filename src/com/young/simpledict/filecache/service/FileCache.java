@@ -46,7 +46,6 @@ public class FileCache {
 
     public void onEvent(DownloadBlobResponse resp) {
         GetFileResponse getFileResponse = new GetFileResponse();
-        //FIXME event code是否正确！
         getFileResponse.setEventCode(resp.getEventCode());
         getFileResponse.resultFile = resp.resultFile;
         EventBus.getDefault().post(getFileResponse);

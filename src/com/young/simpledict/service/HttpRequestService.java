@@ -8,9 +8,8 @@ import com.young.simpledict.service.task.DownloadBlobTask;
 import com.young.simpledict.service.task.SearchWordTask;
 import de.greenrobot.event.EventBus;
 
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -25,8 +24,8 @@ public class HttpRequestService {
     private ExecutorService mThreadPool;
 
     public HttpRequestService() {
-        mThreadPool = new ThreadPoolExecutor(0, 2, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4));
-        mThreadPool = Executors.newFixedThreadPool(2);
+        mThreadPool = new ThreadPoolExecutor(0, 2, 30,
+                TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
         EventBus.getDefault().register(this);
     }
 

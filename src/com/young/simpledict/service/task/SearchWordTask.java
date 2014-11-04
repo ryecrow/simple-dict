@@ -43,11 +43,10 @@ public class SearchWordTask extends BaseTask<DictDetail> {
             default:
                 mDictAdapter = new YoudaoBriefDictAdapter();
         }
-
     }
 
     @Override
-    public DictDetail doTheJob() {
+     public DictDetail doTheJob() {
         HttpClient httpclient = new DefaultHttpClient();
         try {
             HttpGet httpget = new HttpGet(mDictAdapter.getSearchUri(mWordToSearch));
