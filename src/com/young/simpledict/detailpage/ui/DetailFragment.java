@@ -119,18 +119,37 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             ((TextView) header.findViewById(R.id.cnphonetic)).setText(mDictDetail.pinyin);
         } else {
             YLog.i(TAG, "display english");
-            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
-            mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
             TextView us = (TextView) root.findViewById(R.id.dict_header_usphonetic);
-            us.setText(mDictDetail.usphonetic);
             TextView uk = (TextView) root.findViewById(R.id.dict_header_ukphonetic);
-            uk.setText(mDictDetail.ukphonetic);
-            us.measure(0,0);
-            uk.measure(0,0);
-            int width = Math.max(us.getMeasuredWidth(), uk.getMeasuredWidth()) +
-                    (int)getActivity().getResources().getDimension(R.dimen.phonetic_padding);
-            us.setWidth(width);
-            uk.setWidth(width);
+            boolean showUs = !TextUtils.isEmpty(mDictDetail.usphonetic);
+            boolean showUk = !TextUtils.isEmpty(mDictDetail.ukphonetic);
+
+            if (showUs) {
+                us.setText(mDictDetail.usphonetic);
+                mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
+            } else {
+                root.findViewById(R.id.dict_header_us_speech_label).setVisibility(View.GONE);
+                us.setVisibility(View.GONE);
+                root.findViewById(R.id.dict_header_us_speech).setVisibility(View.GONE);
+            }
+
+            if (showUk) {
+                mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
+                uk.setText(mDictDetail.ukphonetic);
+            } else {
+                root.findViewById(R.id.dict_header_uk_speech_label).setVisibility(View.GONE);
+                uk.setVisibility(View.GONE);
+                root.findViewById(R.id.dict_header_uk_speech).setVisibility(View.GONE);
+            }
+
+            if (showUk && showUs) {
+                us.measure(0, 0);
+                uk.measure(0, 0);
+                int width = Math.max(us.getMeasuredWidth(), uk.getMeasuredWidth()) +
+                        (int) getActivity().getResources().getDimension(R.dimen.phonetic_padding);
+                us.setWidth(width);
+                uk.setWidth(width);
+            }
         }
 
         for (DictExplain de : mDictDetail.explains) {

@@ -14,6 +14,7 @@
         <!--<item name="colorAccent"></item>-->
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:textColorPrimaryInverse">#ffffff</item>
+
         <item name="toolbarStyle">@style/toolbar</item>
 
         <!--custom-->
@@ -63,8 +64,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:background">?colorPrimary</item>
-        <item name="android:color">?android:textColorPrimaryInverse</item>
         <item name="android:textColorSecondary">?android:textColorPrimaryInverse</item>
+        <item name="titleTextAppearance">@style/toolbarTitleTextAppearance</item>
+    </style>
+
+    <style name="toolbarTitleTextAppearance" parent="subheadFontStyle">
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
     </style>
 
     <style name="waiting_progressbar_style">
