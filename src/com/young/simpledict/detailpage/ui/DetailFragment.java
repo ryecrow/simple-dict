@@ -128,18 +128,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 us.setText(mDictDetail.usphonetic);
                 mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_us_speech), mDictDetail.usspeech);
             } else {
-                root.findViewById(R.id.dict_header_us_speech_label).setVisibility(View.GONE);
-                us.setVisibility(View.GONE);
-                root.findViewById(R.id.dict_header_us_speech).setVisibility(View.GONE);
+                root.findViewById(R.id.us_speech_layout).setVisibility(View.GONE);
             }
 
             if (showUk) {
                 mSpeakersListener.addListenerToView(root.findViewById(R.id.dict_header_uk_speech), mDictDetail.ukspeech);
                 uk.setText(mDictDetail.ukphonetic);
             } else {
-                root.findViewById(R.id.dict_header_uk_speech_label).setVisibility(View.GONE);
-                uk.setVisibility(View.GONE);
-                root.findViewById(R.id.dict_header_uk_speech).setVisibility(View.GONE);
+                root.findViewById(R.id.uk_speech_layout).setVisibility(View.GONE);
             }
 
             if (showUk && showUs) {
