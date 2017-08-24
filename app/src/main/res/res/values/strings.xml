@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">简约词典</string>
+    <string name="usphonetic">美式发音：</string>
+    <string name="ukphonetic">英式发音：</string>
+    <string name="dict_header_pinyin_label">拼音：</string>
+    <string name="source_sentence">原句</string>
+    <string name="translated_sentence">译句</string>
+    <string name="unknown_dict">《未知词典》</string>
+    <string name="word_not_found_tip">什么也没有o(╯□╰)o</string>
+</resources>

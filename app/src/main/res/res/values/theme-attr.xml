@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppTheme">
+        <attr name="headlineFontAppearance" format="reference" />
+        <attr name="titleFontAppearance" format="reference" />
+        <attr name="subheadFontAppearance" format="reference" />
+        <attr name="bodyFontRegularAppearance" format="reference" />
+        <attr name="bodyFontBoldAppearance" format="reference" />
+
+        <!-- text color-->
+        <attr name="textColorPrimary" format="color" />
+        <attr name="textColorSecondary" format="color" />
+        <attr name="textColorTertiary" format="color" />
+        <attr name="textColorInverse" format="color" />
+        <attr name="textColorListPrimary" format="color" />
+        <attr name="textColorListSecondary" format="color" />
+        <attr name="textColorListTertiary" format="color" />
+        <attr name="textColorListInverse" format="color" />
+        <attr name="textColorHint" format="color" />
+        <attr name="textColorHintSecondary" format="color" />
+        <attr name="textColorLink" format="color" />
+        <attr name="textColorWarning" format="color" />
+    </declare-styleable>
+</resources>
