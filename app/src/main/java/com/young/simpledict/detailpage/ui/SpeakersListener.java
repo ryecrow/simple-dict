@@ -5,10 +5,14 @@ import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.young.simpledict.R;
 import com.young.simpledict.netsoundplayer.request.NetSoundRequest;
 import com.young.simpledict.netsoundplayer.request.NetSoundResponse;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Author: taylorcyang
@@ -53,6 +57,7 @@ public class SpeakersListener implements View.OnClickListener {
         EventBus.getDefault().post(request);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(NetSoundResponse response) {
         if (response.getEventCode() instanceof View
                 && response.getEventCode() == mLastPlayedImageView) {

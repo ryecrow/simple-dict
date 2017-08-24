@@ -20,7 +20,7 @@
 #}
 
 #for eventbus
--keepclassmembers class ** {
-    public void onEvent*(**);
-    void onEvent*(**);
-}
+#-keepclassmembers class ** {
+#    public void onEvent*(**);
+#    void onEvent*(**);
+#}

@@ -6,7 +6,10 @@ import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.task.BaseTask;
 import com.young.simpledict.service.task.DownloadBlobTask;
 import com.young.simpledict.service.task.SearchWordTask;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -59,14 +62,17 @@ public class HttpRequestService {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(SearchWordRequest request) {
         submitTask(SearchWordTask.class, request);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(DownloadBlobRequest request) {
         submitTask(DownloadBlobTask.class, request);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(OnApplicationTerminateEvent e) {
         EventBus.getDefault().unregister(this);
         mThreadPool.shutdownNow();

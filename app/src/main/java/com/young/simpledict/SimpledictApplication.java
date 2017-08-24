@@ -1,9 +1,11 @@
 package com.young.simpledict;
 
 import android.app.Application;
+
 import com.young.simpledict.service.event.OnApplicationStartEvent;
 import com.young.simpledict.service.event.OnApplicationTerminateEvent;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Author: taylorcyang

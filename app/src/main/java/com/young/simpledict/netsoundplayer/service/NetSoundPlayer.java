@@ -1,13 +1,17 @@
 package com.young.simpledict.netsoundplayer.service;
 
 import android.media.MediaPlayer;
+
 import com.young.common.YLog;
 import com.young.simpledict.filecache.request.GetFileRequest;
 import com.young.simpledict.filecache.request.GetFileResponse;
 import com.young.simpledict.filecache.util.FileNameDigester;
 import com.young.simpledict.netsoundplayer.request.NetSoundRequest;
 import com.young.simpledict.netsoundplayer.request.NetSoundResponse;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
@@ -25,6 +29,7 @@ public class NetSoundPlayer {
         EventBus.getDefault().register(this);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(NetSoundRequest request) {
         if (request.releaseAllMediaPlayer) {
             releaseMediaPlayer();
@@ -75,6 +80,7 @@ public class NetSoundPlayer {
      *
      * @param response
      */
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onEventBackgroundThread(GetFileResponse response) {
         MediaPlayer mp = getIdleMediaPlayer();
         final NetSoundResponse res = new NetSoundResponse();

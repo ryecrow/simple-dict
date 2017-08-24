@@ -4,10 +4,11 @@ import com.young.common.YLog;
 import com.young.simpledict.service.event.DownloadBlobRequest;
 import com.young.simpledict.service.event.DownloadBlobResponse;
 import com.young.simpledict.service.httphandler.DownloadBlobHandler;
-import de.greenrobot.event.EventBus;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 

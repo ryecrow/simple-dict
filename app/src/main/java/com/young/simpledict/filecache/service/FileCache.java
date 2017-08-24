@@ -1,11 +1,15 @@
 package com.young.simpledict.filecache.service;
 
 import android.util.Pair;
+
 import com.young.simpledict.filecache.request.GetFileRequest;
 import com.young.simpledict.filecache.request.GetFileResponse;
 import com.young.simpledict.service.event.DownloadBlobRequest;
 import com.young.simpledict.service.event.DownloadBlobResponse;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -27,6 +31,7 @@ public class FileCache {
         return mCacheDir;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(GetFileRequest req) {
         String filename = mCacheDir + req.fileName;
         File file = new File(filename);
@@ -44,6 +49,7 @@ public class FileCache {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(DownloadBlobResponse resp) {
         GetFileResponse getFileResponse = new GetFileResponse();
         getFileResponse.setEventCode(resp.getEventCode());

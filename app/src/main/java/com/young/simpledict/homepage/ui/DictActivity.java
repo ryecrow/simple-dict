@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
 import com.young.common.YLog;
 import com.young.droidinject.Inject;
 import com.young.droidinject.InjectView;
@@ -20,7 +21,10 @@ import com.young.simpledict.dict.DictAdapter;
 import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class DictActivity extends ActionBarActivity implements View.OnClickListener {
     private static final String TAG = "DictActivity";
@@ -82,6 +86,7 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(@NonNull SearchWordResponse response) {
         mProgressBarOperator.dismiss();
         DictDetail info = response.dictDetail;

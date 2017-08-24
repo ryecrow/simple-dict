@@ -8,10 +8,11 @@ import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
 import com.young.simpledict.service.httphandler.SearchWordResponseHandler;
-import de.greenrobot.event.EventBus;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Author: taylorcyang
