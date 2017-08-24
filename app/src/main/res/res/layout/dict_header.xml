@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/dict_detail_card"
+        >
+
+    <LinearLayout
+            android:id="@+id/dict_detail_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/card_padding"
+            android:orientation="vertical"
+            >
+
+        <TextView
+                android:id="@+id/dict_header_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?headlineFontAppearance"
+                />
+
+        <LinearLayout
+                android:id="@+id/dict_header_engphonetic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <LinearLayout
+                    android:id="@+id/us_speech_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                <TextView
+                        android:id="@+id/dict_header_us_speech_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usphonetic"
+                        />
+
+                <TextView
+                        android:id="@+id/dict_header_usphonetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                <ImageView
+                        android:id="@+id/dict_header_us_speech"
+                        style="@style/dict_speaker"
+                        />
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/uk_speech_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                <TextView
+                        android:id="@+id/dict_header_uk_speech_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ukphonetic"
+                        />
+
+                <TextView
+                        android:id="@+id/dict_header_ukphonetic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                <ImageView
+                        android:id="@+id/dict_header_uk_speech"
+                        style="@style/dict_speaker"
+                        />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/dict_header_cnphonetic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dict_header_pinyin_label"
+                    />
+
+            <TextView
+                    android:id="@+id/cnphonetic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
