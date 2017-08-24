@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   15:46
  * Life with passion. Code with creativity!

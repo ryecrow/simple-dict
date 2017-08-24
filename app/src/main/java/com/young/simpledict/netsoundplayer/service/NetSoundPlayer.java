@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.IOException;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-29
  * Time:   12:09
  * Life with passion. Code with creativity!

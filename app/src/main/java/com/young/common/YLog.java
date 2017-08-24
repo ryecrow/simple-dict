@@ -3,7 +3,7 @@ package com.young.common;
 import android.util.Log;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   19:20
  * Life with passion. Code with creativity!

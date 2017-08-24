@@ -3,7 +3,7 @@ package com.young;
 import com.young.simpledict.filecache.util.FileNameDigester;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-29
  * Time:   10:34
  * Life with passion. Code with creativity!

@@ -4,23 +4,24 @@ import com.young.common.YLog;
 import com.young.simpledict.GlobalContext;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-28
  * Time:   21:02
  * Life with passion. Code with creativity!
  */
 public abstract class BaseTask<T> implements Callable<T> {
     private static final String TAG = "BaseTask";
-    private int mRetryCount;
+    private final AtomicInteger mRetryCount = new AtomicInteger();
 
     public final int getRetryCount() {
-        return mRetryCount;
+        return mRetryCount.get();
     }
 
     public final int increaseRetryCount() {
-        return ++mRetryCount;
+        return mRetryCount.incrementAndGet();
     }
 
     public final T call() {

@@ -15,7 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   17:10
  * Life with passion. Code with creativity!

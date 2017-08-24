@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-28
  * Time:   21:38
  * Life with passion. Code with creativity!

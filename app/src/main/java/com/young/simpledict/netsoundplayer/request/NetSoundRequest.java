@@ -3,7 +3,7 @@ package com.young.simpledict.netsoundplayer.request;
 import com.young.simpledict.service.event.BaseEvent;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-29
  * Time:   12:11
  * Life with passion. Code with creativity!

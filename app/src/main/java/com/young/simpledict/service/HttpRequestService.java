@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   15:46
  * Life with passion. Code with creativity!

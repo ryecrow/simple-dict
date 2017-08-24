@@ -15,7 +15,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-30
  * Time:   11:49
  * Life with passion. Code with creativity!

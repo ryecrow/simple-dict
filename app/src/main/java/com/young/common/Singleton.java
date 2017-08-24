@@ -1,13 +1,13 @@
 package com.young.common;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   15:58
  * Life with passion. Code with creativity!
  */
 public abstract class Singleton<T> {
-    private T mInstance;
+    private volatile T mInstance;
 
     public abstract T create();
 

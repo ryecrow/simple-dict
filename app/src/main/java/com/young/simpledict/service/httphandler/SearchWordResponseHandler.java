@@ -12,7 +12,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyoung
  * Date:   2014-10-21
  * Time:   17:26
  * Life with passion. Code with creativity!
