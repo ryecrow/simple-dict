@@ -1,4 +1,4 @@
-package com.young.droidinject;
+package com.young.common.inject;
 
 import android.app.Activity;
 
@@ -10,19 +10,17 @@ import java.lang.reflect.Field;
  * Time:   10:37
  * Life with passion. Code with creativity!
  */
-public class Inject {
-    public static void inject(Activity o) {
+public class ViewInject {
+    public static void doInject(Activity o) {
         Field[] fields = o.getClass().getDeclaredFields();
         for (Field f : fields) {
-            InjectView iv = f.getAnnotation(InjectView.class);
+            Inject iv = f.getAnnotation(Inject.class);
             if (iv != null) {
                 try {
                     f.setAccessible(true);
                     f.set(o, o.findViewById(iv.value()));
-                } catch (IllegalAccessException e) {
-
-                } catch (IllegalArgumentException ex) {
-                    throw new IllegalArgumentException("Type of View in xml and declared class is not compatible!");
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    throw new IllegalArgumentException(String.format("Cannot doInject. nested exception is %s.", e.getMessage()), e);
                 }
             }
         }

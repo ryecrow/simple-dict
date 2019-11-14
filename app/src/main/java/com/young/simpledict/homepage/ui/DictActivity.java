@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.young.common.YLog;
-import com.young.droidinject.Inject;
-import com.young.droidinject.InjectView;
+import com.young.common.inject.Inject;
+import com.young.common.inject.ViewInject;
 import com.young.simpledict.R;
 import com.young.simpledict.detailpage.ui.DetailFragment;
 import com.young.simpledict.dict.DictAdapter;
@@ -29,16 +29,16 @@ import org.greenrobot.eventbus.ThreadMode;
 public class DictActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "DictActivity";
 
-    @InjectView(R.id.search_box)
+    @Inject(R.id.search_box)
     EditText mSearchBox;
 
-    @InjectView(R.id.search_button)
+    @Inject(R.id.search_button)
     Button mSearchButton;
 
-    @InjectView(R.id.toolbar)
+    @Inject(R.id.toolbar)
     Toolbar mToolbar;
 
-    @InjectView(R.id.waiting_progressbar)
+    @Inject(R.id.waiting_progressbar)
     ProgressBar mWaitingProgressbar;
 
     private ProgressBarOperator mProgressBarOperator = new ProgressBarOperator();
@@ -49,7 +49,7 @@ public class DictActivity extends AppCompatActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dict_activity);
-        Inject.inject(this);
+        ViewInject.doInject(this);
         setSupportActionBar(mToolbar);
         mSearchButton.setOnClickListener(this);
         mDictDetailFragment = new DetailFragment();
