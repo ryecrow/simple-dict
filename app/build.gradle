@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion versions.targetSdk
+    buildToolsVersion versions.buildTools
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.young.simpledict"
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
     }
 
     buildTypes {
@@ -20,9 +20,9 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:${support_version}"
-    implementation "com.android.support:cardview-v7:${support_version}"
-    implementation "com.android.support:recyclerview-v7:${support_version}"
+    implementation "com.android.support:appcompat-v7:" + versions.support
+    implementation "com.android.support:cardview-v7:" + versions.support
+    implementation "com.android.support:recyclerview-v7:" + versions.support
     implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
     implementation 'com.github.castorflex.smoothprogressbar:library-circular:1.1.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
