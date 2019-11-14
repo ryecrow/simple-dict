@@ -5,9 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
 import com.young.common.YLog;
 import com.young.simpledict.R;
 import com.young.simpledict.dict.model.AudioSentence;
@@ -38,6 +40,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "DetailFragment";
 
     private ScrollView mRootScrollView;
+
     private LinearLayout mRootContainer;
     private LayoutInflater mInflater;
     private DictDetail mDictDetail;

@@ -9,12 +9,11 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
 
     dependencies {
-        classpath gradlePlugins.android
-        classpath gradlePlugins.kotlin
+        classpath "com.android.tools.build:gradle:$versions.gradle"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
 }
 
@@ -24,6 +23,5 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
 }
