@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class DictActivity extends ActionBarActivity implements View.OnClickListener {
+public class DictActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "DictActivity";
 
     @InjectView(R.id.search_box)
