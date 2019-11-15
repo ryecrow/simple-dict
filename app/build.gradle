@@ -28,6 +28,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$versions.androidx"
     implementation "androidx.core:core-ktx:$versions.androidx"
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
     implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
     implementation 'com.github.castorflex.smoothprogressbar:library-circular:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
