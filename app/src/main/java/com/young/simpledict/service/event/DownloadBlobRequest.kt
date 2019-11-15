@@ -5,7 +5,7 @@ import android.util.Pair
 import java.io.File
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-28
  * Time:   20:47
  * Life with passion. Code with creativity!

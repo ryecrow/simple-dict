@@ -12,7 +12,7 @@ import org.json.JSONException
 import org.json.JSONObject
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   19:02
  * Life with passion. Code with creativity!

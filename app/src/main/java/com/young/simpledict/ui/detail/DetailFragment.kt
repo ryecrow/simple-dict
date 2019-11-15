@@ -22,7 +22,7 @@ import com.young.simpledict.dict.model.TranslateSentence
 import java.util.*
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-25
  * Time:   16:01
  * Life with passion. Code with creativity!

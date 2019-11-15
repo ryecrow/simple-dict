@@ -8,7 +8,7 @@ import com.young.simpledict.service.event.OnApplicationTerminateEvent
 import org.greenrobot.eventbus.EventBus
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   16:46
  * Life with passion. Code with creativity!

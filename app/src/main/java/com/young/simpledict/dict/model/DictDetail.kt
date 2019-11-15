@@ -3,7 +3,7 @@ package com.young.simpledict.dict.model
 import java.util.*
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   15:20
  * Life with passion. Code with creativity!

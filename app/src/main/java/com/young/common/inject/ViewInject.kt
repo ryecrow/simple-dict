@@ -3,7 +3,7 @@ package com.young.common.inject
 import android.app.Activity
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   10:37
  * Life with passion. Code with creativity!

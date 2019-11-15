@@ -15,7 +15,7 @@ import java.io.IOException
 import javax.net.ssl.HostnameVerifier
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   17:10
  * Life with passion. Code with creativity!

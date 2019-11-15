@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.ThreadMode
 import java.io.File
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-28
  * Time:   20:43
  * Life with passion. Code with creativity!

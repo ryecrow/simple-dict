@@ -8,7 +8,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-28
  * Time:   21:02
  * Life with passion. Code with creativity!

@@ -3,7 +3,7 @@ package com.young.simpledict.dict.model
 import com.young.common.NameValuePair
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-22
  * Time:   16:05
  * Life with passion. Code with creativity!

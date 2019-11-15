@@ -1,7 +1,7 @@
 package com.young.common.inject
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-21
  * Time:   10:39
  * Life with passion. Code with creativity!

@@ -1,7 +1,7 @@
 package com.young.simpledict.dict.model
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-22
  * Time:   17:12
  * Life with passion. Code with creativity!

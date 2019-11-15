@@ -6,7 +6,7 @@ import java.util.Formatter;
 import java.util.Locale;
 
 /**
- * Author: taylorcyang
+ * Author: landerlyang
  * Date:   2014-10-28
  * Time:   20:36
  * Life with passion. Code with creativity!
