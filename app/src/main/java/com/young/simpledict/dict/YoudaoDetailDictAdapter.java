@@ -1,10 +1,12 @@
 package com.young.simpledict.dict;
 
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.dict.model.AudioSentence;
-import com.young.simpledict.dict.model.Wiki;
 import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.dict.model.TranslateSentence;
+import com.young.simpledict.dict.model.Wiki;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +48,7 @@ public class YoudaoDetailDictAdapter extends YoudaoBriefDictAdapter {
             }
             parseBaike(json, d);
         } catch (JSONException e) {
-            YLog.i(TAG, "parse response json failed", e);
+            Log.i(TAG, "parse response json failed", e);
         }
         return d;
     }
