@@ -9,10 +9,10 @@ import com.young.simpledict.dict.model.DictDetail;
  * Life with passion. Code with creativity!
  */
 public interface DictAdapter {
-    public static final int DICT_YOUDAO_BRIEF = 0;
-    public static final int DICT_YOUDAO_DETAIL = 1;
+    int DICT_YOUDAO_BRIEF = 0;
+    int DICT_YOUDAO_DETAIL = 1;
 
-    public String getSearchUri(String mWordToSearch);
+    String getSearchUri(String mWordToSearch);
 
-    public DictDetail parseDict(String response);
+    DictDetail parseDict(String response);
 }

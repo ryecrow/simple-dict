@@ -1,4 +1,4 @@
-package com.young.droidinject;
+package com.young.common.inject;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface InjectView {
+public @interface Inject {
     int value();
 }

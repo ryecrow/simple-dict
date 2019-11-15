@@ -1,18 +1,22 @@
 package com.young.simpledict.service.task;
 
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.dict.DictAdapter;
 import com.young.simpledict.dict.YoudaoBriefDictAdapter;
 import com.young.simpledict.dict.YoudaoDetailDictAdapter;
 import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.service.event.SearchWordRequest;
 import com.young.simpledict.service.event.SearchWordResponse;
-import com.young.simpledict.service.httphandler.SearchWordResponseHandler;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.greenrobot.eventbus.EventBus;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * Author: landerlyoung
@@ -47,18 +51,36 @@ public class SearchWordTask extends BaseTask<DictDetail> {
     }
 
     @Override
-     public DictDetail doTheJob() {
-        HttpClient httpclient = new DefaultHttpClient();
+    public DictDetail doTheJob() {
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .hostnameVerifier((hostname, session) -> true)
+                .build();
+        Request getFileRequest = new Request.Builder()
+                .get()
+                .url(mDictAdapter.getSearchUri(mWordToSearch))
+                .build();
+        Response response;
         try {
-            HttpGet httpget = new HttpGet(mDictAdapter.getSearchUri(mWordToSearch));
-            DictDetail responseBody = httpclient.execute(httpget, new SearchWordResponseHandler(mDictAdapter));
+            response = client.newCall(getFileRequest).execute();
+        } catch (IOException e) {
+            Log.i(TAG, "Failed to execute request.", e);
+            return null;
+        }
+        ResponseBody body = response.body();
+        if (!response.isSuccessful() || (body == null)) {
+            Log.i(TAG, "Unexpected response status: " + response.code());
+            return null;
+        }
+        try {
+            DictDetail detail = mDictAdapter.parseDict(body.string());
             SearchWordResponse r = new SearchWordResponse();
-            r.dictDetail = responseBody;
+            r.dictDetail = detail;
             r.setEventCode(requestEventCode);
             EventBus.getDefault().post(r);
-            return responseBody;
-        } catch (Exception e) {
-            YLog.i(TAG, "request failed", e);
+            return detail;
+        } catch (IOException e) {
+            Log.i(TAG, "Failed to parse detail message from response.", e);
         }
         return null;
     }

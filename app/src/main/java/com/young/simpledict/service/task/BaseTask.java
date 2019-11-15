@@ -1,6 +1,7 @@
 package com.young.simpledict.service.task;
 
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.GlobalContext;
 
 import java.util.concurrent.Callable;
@@ -29,7 +30,7 @@ public abstract class BaseTask<T> implements Callable<T> {
         try {
             ret = doTheJob();
         } catch (Exception e) {
-            YLog.i(TAG, "execute failed", e);
+            Log.i(TAG, "execute failed", e);
             GlobalContext.getRequestService().retryTask(this);
         }
         return ret;

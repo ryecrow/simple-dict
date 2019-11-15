@@ -4,17 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.young.common.YLog;
-import com.young.droidinject.Inject;
-import com.young.droidinject.InjectView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.young.common.inject.Inject;
+import com.young.common.inject.ViewInject;
 import com.young.simpledict.R;
 import com.young.simpledict.detailpage.ui.DetailFragment;
 import com.young.simpledict.dict.DictAdapter;
@@ -26,19 +27,19 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class DictActivity extends ActionBarActivity implements View.OnClickListener {
+public class DictActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "DictActivity";
 
-    @InjectView(R.id.search_box)
+    @Inject(R.id.search_box)
     EditText mSearchBox;
 
-    @InjectView(R.id.search_button)
+    @Inject(R.id.search_button)
     Button mSearchButton;
 
-    @InjectView(R.id.toolbar)
+    @Inject(R.id.toolbar)
     Toolbar mToolbar;
 
-    @InjectView(R.id.waiting_progressbar)
+    @Inject(R.id.waiting_progressbar)
     ProgressBar mWaitingProgressbar;
 
     private ProgressBarOperator mProgressBarOperator = new ProgressBarOperator();
@@ -49,7 +50,7 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dict_activity);
-        Inject.inject(this);
+        ViewInject.doInject(this);
         setSupportActionBar(mToolbar);
         mSearchButton.setOnClickListener(this);
         mDictDetailFragment = new DetailFragment();
@@ -92,8 +93,8 @@ public class DictActivity extends ActionBarActivity implements View.OnClickListe
         DictDetail info = response.dictDetail;
         long s = System.currentTimeMillis();
         mDictDetailFragment.setData(info);
-        YLog.i(TAG, "setData consuming time:" + (System.currentTimeMillis() - s));
-        YLog.i(TAG, info.word);
+        Log.i(TAG, "setData consuming time:" + (System.currentTimeMillis() - s));
+        Log.i(TAG, info.word);
     }
 
     private class ProgressBarOperator {
