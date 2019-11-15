@@ -1,8 +1,8 @@
 package com.young.simpledict.netsoundplayer.service;
 
 import android.media.MediaPlayer;
+import android.util.Log;
 
-import com.young.common.YLog;
 import com.young.simpledict.filecache.request.GetFileRequest;
 import com.young.simpledict.filecache.request.GetFileResponse;
 import com.young.simpledict.filecache.util.FileNameDigester;
@@ -109,7 +109,7 @@ public class NetSoundPlayer {
             });
             mp.prepareAsync();
         } catch (IOException e) {
-            YLog.i(TAG, "playsound failed");
+            Log.i(TAG, "playsound failed");
         }
     }
 

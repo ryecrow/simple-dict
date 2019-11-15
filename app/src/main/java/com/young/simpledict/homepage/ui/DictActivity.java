@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.young.common.YLog;
 import com.young.common.inject.Inject;
 import com.young.common.inject.ViewInject;
 import com.young.simpledict.R;
@@ -93,8 +93,8 @@ public class DictActivity extends AppCompatActivity implements View.OnClickListe
         DictDetail info = response.dictDetail;
         long s = System.currentTimeMillis();
         mDictDetailFragment.setData(info);
-        YLog.i(TAG, "setData consuming time:" + (System.currentTimeMillis() - s));
-        YLog.i(TAG, info.word);
+        Log.i(TAG, "setData consuming time:" + (System.currentTimeMillis() - s));
+        Log.i(TAG, info.word);
     }
 
     private class ProgressBarOperator {

@@ -1,9 +1,11 @@
 package com.young.simpledict.dict;
 
 import android.net.Uri;
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.dict.model.DictDetail;
 import com.young.simpledict.dict.model.DictExplain;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +38,7 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
             }
             parseDict(json, d);
         } catch (JSONException e) {
-            YLog.v(TAG, "parse response json failed", e);
+            Log.v(TAG, "parse response json failed", e);
         }
         return d;
     }
@@ -59,7 +61,7 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
                             o.getString("ukspeech");
                 }
             } catch (Exception e) {
-                YLog.v(TAG, "parse header failed", e);
+                Log.v(TAG, "parse header failed", e);
             }
         }
     }
@@ -116,7 +118,7 @@ public class YoudaoBriefDictAdapter implements DictAdapter {
                     }
                 }
             } catch (Exception e) {
-                YLog.v(TAG, "Parse dictionary failed", e);
+                Log.v(TAG, "Parse dictionary failed", e);
             }
 
         }

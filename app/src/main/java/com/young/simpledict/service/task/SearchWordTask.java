@@ -1,6 +1,7 @@
 package com.young.simpledict.service.task;
 
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.dict.DictAdapter;
 import com.young.simpledict.dict.YoudaoBriefDictAdapter;
 import com.young.simpledict.dict.YoudaoDetailDictAdapter;
@@ -63,12 +64,12 @@ public class SearchWordTask extends BaseTask<DictDetail> {
         try {
             response = client.newCall(getFileRequest).execute();
         } catch (IOException e) {
-            YLog.i(TAG, "Failed to execute request.", e);
+            Log.i(TAG, "Failed to execute request.", e);
             return null;
         }
         ResponseBody body = response.body();
         if (!response.isSuccessful() || (body == null)) {
-            YLog.i(TAG, "Unexpected response status: " + response.code());
+            Log.i(TAG, "Unexpected response status: " + response.code());
             return null;
         }
         try {
@@ -79,7 +80,7 @@ public class SearchWordTask extends BaseTask<DictDetail> {
             EventBus.getDefault().post(r);
             return detail;
         } catch (IOException e) {
-            YLog.i(TAG, "Failed to parse detail message from response.", e);
+            Log.i(TAG, "Failed to parse detail message from response.", e);
         }
         return null;
     }

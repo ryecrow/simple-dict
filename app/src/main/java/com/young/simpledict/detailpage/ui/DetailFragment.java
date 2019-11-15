@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.young.common.YLog;
 import com.young.simpledict.R;
 import com.young.simpledict.dict.model.AudioSentence;
 import com.young.simpledict.dict.model.DictDetail;
@@ -116,12 +116,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         if (mDictDetail.pinyin != null &&
                 (mDictDetail.ukphonetic == null && mDictDetail.usphonetic == null)) {
             //display only chinese
-            YLog.i(TAG, "display only chinese");
+            Log.i(TAG, "display only chinese");
             engphonic.setVisibility(View.GONE);
             cnphonic.setVisibility(View.VISIBLE);
             ((TextView) header.findViewById(R.id.cnphonetic)).setText(mDictDetail.pinyin);
         } else {
-            YLog.i(TAG, "display english");
+            Log.i(TAG, "display english");
             TextView us = (TextView) root.findViewById(R.id.dict_header_usphonetic);
             TextView uk = (TextView) root.findViewById(R.id.dict_header_ukphonetic);
             boolean showUs = !TextUtils.isEmpty(mDictDetail.usphonetic);

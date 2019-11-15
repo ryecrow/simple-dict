@@ -1,6 +1,7 @@
 package com.young.simpledict.service.task;
 
-import com.young.common.YLog;
+import android.util.Log;
+
 import com.young.simpledict.service.event.DownloadBlobRequest;
 import com.young.simpledict.service.event.DownloadBlobResponse;
 
@@ -43,19 +44,19 @@ public class DownloadBlobTask extends BaseTask<File> {
         try {
             response = client.newCall(getFileRequest).execute();
         } catch (IOException e) {
-            YLog.i(TAG, "Failed to execute request.", e);
+            Log.i(TAG, "Failed to execute request.", e);
             return null;
         }
         ResponseBody body = response.body();
         if (!response.isSuccessful() || (body == null)) {
-            YLog.i(TAG, "Unexpected response status: " + response.code());
+            Log.i(TAG, "Unexpected response status: " + response.code());
             return null;
         }
         File fileToWrite = mRequest.requestUrlAndFileToStore.second;
         try (BufferedSink sink = Okio.buffer(Okio.sink(fileToWrite))) {
             sink.writeAll(body.source());
         } catch (IOException e) {
-            YLog.i(TAG, "request failed", e);
+            Log.i(TAG, "request failed", e);
             return null;
         }
         DownloadBlobResponse r = new DownloadBlobResponse();
