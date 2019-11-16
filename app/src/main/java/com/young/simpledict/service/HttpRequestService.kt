@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import kotlin.reflect.KClass
 
 /**
  * Author: landerlyang
@@ -34,44 +35,42 @@ class HttpRequestService {
     }
 
     fun retryTask(task: BaseTask<*>): Boolean {
-        if (task.increaseRetryCount() <= MAX_TASK_RETRY_TIMES) {
+        return if (task.increaseRetryCount() <= MAX_TASK_RETRY_TIMES) {
             submitTask(task)
-            return true
         } else {
             task.onTaskFail()
-            return false
+            false
         }
     }
 
-    fun submitTask(task: BaseTask<*>): Boolean {
+    private fun submitTask(task: BaseTask<*>): Boolean {
         //TODO add some future related stuff
         mThreadPool.submit(task)
         return true
     }
 
-    private fun submitTask(taskClazz: Class<out BaseTask<*>>, vararg params: Any): Boolean {
+    private fun submitTask(taskClazz: KClass<out BaseTask<*>>, vararg params: Any): Boolean {
         val task: BaseTask<*>
         return try {
             val paramType = arrayOfNulls<Class<*>>(params.size)
             for (i in params.indices) {
                 paramType[i] = params[i].javaClass
             }
-            task = taskClazz.getConstructor(*paramType).newInstance(*params)
+            task = taskClazz.java.getConstructor(*paramType).newInstance(*params)
             submitTask(task)
         } catch (e: Exception) {
             false
         }
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(request: SearchWordRequest) {
-        submitTask(SearchWordTask::class.java, request)
+        submitTask(SearchWordTask::class, request)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(request: DownloadBlobRequest) {
-        submitTask(DownloadBlobTask::class.java, request)
+        submitTask(DownloadBlobTask::class, request)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

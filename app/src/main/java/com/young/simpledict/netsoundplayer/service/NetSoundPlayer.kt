@@ -48,6 +48,8 @@ class NetSoundPlayer {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(request: NetSoundRequest) {
+
+
         if (request.releaseAllMediaPlayer) {
             releaseMediaPlayer()
         } else if (request.requestCode == NetSoundRequest.REQUEST_START) {
@@ -102,17 +104,17 @@ class NetSoundPlayer {
      */
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     fun onEventBackgroundThread(response: GetFileResponse) {
-        val mp = idleMediaPlayer
+        val mediaPlayer = idleMediaPlayer
         val res = NetSoundResponse()
         res.setEventCode(response.eventCode)
         try {
-            mp.setDataSource(response.resultFile!!.absolutePath)
-            mp.setOnPreparedListener { mp ->
+            mediaPlayer.setDataSource(response.resultFile!!.absolutePath)
+            mediaPlayer.setOnPreparedListener { mp ->
                 mp.start()
                 res.responseState = NetSoundResponse.RESPONSE_PLAYING
                 EventBus.getDefault().post(res)
             }
-            mp.setOnCompletionListener { mp ->
+            mediaPlayer.setOnCompletionListener { mp ->
                 try {
                     mp.reset()
                 } catch (ex: IllegalStateException) {
@@ -122,14 +124,14 @@ class NetSoundPlayer {
                 res.responseState = NetSoundResponse.RESPONSE_COMPLETED
                 EventBus.getDefault().post(res)
             }
-            mp.prepareAsync()
+            mediaPlayer.prepareAsync()
         } catch (e: IOException) {
             Log.i(TAG, "playsound failed")
         }
 
     }
 
-    fun releaseMediaPlayer() {
+    private fun releaseMediaPlayer() {
         if (mMediaPlayer != null) {
             mMediaPlayer!!.release()
             mMediaPlayer = null

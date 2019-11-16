@@ -42,11 +42,11 @@ object GlobalContext {
 
     private val sCacheDir = object : Singleton<String>() {
         override fun init(): String {
-            val externalCachedir = application!!.externalCacheDir
-            return if (externalCachedir == null) {
+            val externalCacheDir = application!!.externalCacheDir
+            return if (externalCacheDir == null) {
                 application!!.cacheDir.absolutePath + '/'
             } else {
-                externalCachedir.absolutePath + '/'
+                externalCacheDir.absolutePath + '/'
             }
         }
     }
@@ -60,16 +60,16 @@ object GlobalContext {
         }
     }
 
-    val fileCache: FileCache
+    private val fileCache: FileCache
         get() = sFileCache.get()
 
-    val sNetSoundPlayer: Singleton<NetSoundPlayer> = object : Singleton<NetSoundPlayer>() {
+    private val sNetSoundPlayer: Singleton<NetSoundPlayer> = object : Singleton<NetSoundPlayer>() {
         override fun init(): NetSoundPlayer {
             return NetSoundPlayer()
         }
     }
 
-    val netSoundPlayer: NetSoundPlayer
+    private val netSoundPlayer: NetSoundPlayer
         get() = sNetSoundPlayer.get()
 
     fun init() {
