@@ -1,8 +1,5 @@
-simple-dict
+Dictionary
 ===========
 
-A very simple english dictionary
-
-depedency:
-android-support-v7:v21
-[SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)
+A very simple (but modern) English dictionary
+Based on [@LanderlYoung](https://github.com/LanderlYoung)'s [simple-dict](https://github.com/LanderlYoung/simple-dict)
