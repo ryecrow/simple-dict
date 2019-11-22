@@ -40,7 +40,7 @@
                         android:id="@+id/dict_header_us_speech_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/usphonetic"
+                    android:text="@string/us_phonetic"
                         />
 
                 <TextView
@@ -67,7 +67,7 @@
                         android:id="@+id/dict_header_uk_speech_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ukphonetic"
+                    android:text="@string/uk_phonetic"
                         />
 
                 <TextView
