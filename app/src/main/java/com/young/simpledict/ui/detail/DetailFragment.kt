@@ -19,6 +19,7 @@ import com.young.simpledict.R
 import com.young.simpledict.dict.model.DictDetail
 import com.young.simpledict.dict.model.TranslateSentence
 import java.util.*
+import kotlin.math.max
 
 /**
  * Author: landerlyang
@@ -128,7 +129,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
             if (showUk && showUs) {
                 us.measure(0, 0)
                 uk.measure(0, 0)
-                val width = Math.max(
+                val width = max(
                     us.measuredWidth,
                     uk.measuredWidth
                 ) + activity!!.resources.getDimension(R.dimen.phonetic_padding).toInt()
@@ -214,14 +215,14 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 `as`.sentenceAudioUrl
             )
             (ll.findViewById<View>(R.id.audio_sentence_text) as TextView).text =
-                Html.fromHtml(`as`.sentence)
+                Html.fromHtml(`as`.sentence, 0)
             rootContainer.addView(ll)
         }
         mRootContainer!!.addView(root)
     }
 
     private fun addWiki() {
-        if (mDictDetail!!.wiki == null) {
+        if (mDictDetail?.wiki == null) {
             return
         }
         val wiki = mDictDetail!!.wiki
@@ -237,7 +238,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
         }
         for (summary in wiki.summary) {
             val sum = mInflater!!.inflate(R.layout.dict_wiki_summary, root, false) as TextView
-            sum.text = Html.fromHtml(summary)
+            sum.text = Html.fromHtml(summary, 0)
             rootContainer.addView(sum)
         }
         mRootContainer!!.addView(root)
@@ -248,9 +249,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        when (v.id) {
-
-        }
     }
 
     companion object {

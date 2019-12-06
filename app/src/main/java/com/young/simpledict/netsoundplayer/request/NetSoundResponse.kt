@@ -10,7 +10,7 @@ import com.young.simpledict.service.event.BaseEvent
  */
 class NetSoundResponse(eventCode: Any, var responseState: Int) : BaseEvent(eventCode) {
 
-    constructor() : this(BaseEvent.EMPTY_EVENT_CODE, 0)
+    constructor() : this(EMPTY_EVENT_CODE, 0)
 
     companion object {
         const val RESPONSE_PLAYING = 1

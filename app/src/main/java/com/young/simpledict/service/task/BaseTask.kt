@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger
  * Life with passion. Code with creativity!
  */
 abstract class BaseTask<T> : Callable<T> {
-    var retryCount: AtomicInteger = AtomicInteger(0)
-        private set
+
+    private var retryCount: AtomicInteger = AtomicInteger(0)
 
     fun increaseRetryCount(): Int {
         return retryCount.incrementAndGet()

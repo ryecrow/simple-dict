@@ -50,50 +50,52 @@ class NetSoundPlayer {
     fun onEvent(request: NetSoundRequest) {
 
 
-        if (request.releaseAllMediaPlayer) {
-            releaseMediaPlayer()
-        } else if (request.requestCode == NetSoundRequest.REQUEST_START) {
-            val getFileRequest = GetFileRequest(
-                request.eventCode,
-                FileNameDigester.digest(request.soundUrl),
-                request.soundUrl
-            )
-            EventBus.getDefault().post(getFileRequest)
-        } else {
-            var retState = NetSoundResponse.RESPONSE_FAILED
-            if (mMediaPlayer != null) {
-                try {
-                    when (request.requestCode) {
-                        NetSoundRequest.REQUEST_PAUSE -> {
-                            mMediaPlayer!!.pause()
-                            retState = NetSoundResponse.RESPONSE_PAUSED
-                        }
-                        NetSoundRequest.REQUEST_RESUME -> {
-                            mMediaPlayer!!.start()
-                            retState = NetSoundResponse.RESPONSE_PLAYING
-                        }
-                        NetSoundRequest.REQUEST_STOP -> {
-                            mMediaPlayer!!.stop()
-                            retState = NetSoundResponse.RESPONSE_COMPLETED
-                        }
-                    }
-                } catch (e: IllegalStateException) {
-                    try {
-                        //try to reset mediaplayer
-                        mMediaPlayer!!.reset()
-                    } catch (ex: IllegalStateException) {
-
-                    }
-
-                    //already initialized
-                    //retState = NetSoundResponse.RESPONSE_FAILED;
-                }
-
+        when {
+            request.releaseAllMediaPlayer -> releaseMediaPlayer()
+            request.requestCode == NetSoundRequest.REQUEST_START -> {
+                val getFileRequest = GetFileRequest(
+                    request.eventCode,
+                    FileNameDigester.digest(request.soundUrl),
+                    request.soundUrl
+                )
+                EventBus.getDefault().post(getFileRequest)
             }
-            val response = NetSoundResponse()
-            response.setEventCode(request.eventCode)
-            response.responseState = retState
-            EventBus.getDefault().post(response)
+            else -> {
+                var retState = NetSoundResponse.RESPONSE_FAILED
+                if (mMediaPlayer != null) {
+                    try {
+                        when (request.requestCode) {
+                            NetSoundRequest.REQUEST_PAUSE -> {
+                                mMediaPlayer!!.pause()
+                                retState = NetSoundResponse.RESPONSE_PAUSED
+                            }
+                            NetSoundRequest.REQUEST_RESUME -> {
+                                mMediaPlayer!!.start()
+                                retState = NetSoundResponse.RESPONSE_PLAYING
+                            }
+                            NetSoundRequest.REQUEST_STOP -> {
+                                mMediaPlayer!!.stop()
+                                retState = NetSoundResponse.RESPONSE_COMPLETED
+                            }
+                        }
+                    } catch (e: IllegalStateException) {
+                        try {
+                            //try to reset mediaplayer
+                            mMediaPlayer!!.reset()
+                        } catch (ex: IllegalStateException) {
+
+                        }
+
+                        //already initialized
+                        //retState = NetSoundResponse.RESPONSE_FAILED;
+                    }
+
+                }
+                val response = NetSoundResponse()
+                response.setEventCode(request.eventCode)
+                response.responseState = retState
+                EventBus.getDefault().post(response)
+            }
         }
     }
 
