@@ -8,4 +8,6 @@
     <string name="translated_sentence">Translation</string>
     <string name="unknown_dict">Unknown dictionary</string>
     <string name="word_not_found_tip">Nothing here</string>
+    <string name="search_button_text">Search</string>
+    <string name="default_word_when_void" translatable="false">he</string>
 </resources>
