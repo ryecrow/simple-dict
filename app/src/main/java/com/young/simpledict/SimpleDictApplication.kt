@@ -18,12 +18,8 @@ class SimpleDictApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         GlobalContext.application = this
-        initApplication()
-        EventBus.getDefault().post(OnApplicationStartEvent(SimpleDictApplication::class))
-    }
-
-    private fun initApplication() {
         GlobalContext.init()
+        EventBus.getDefault().post(OnApplicationStartEvent(SimpleDictApplication::class))
     }
 
     override fun onTerminate() {

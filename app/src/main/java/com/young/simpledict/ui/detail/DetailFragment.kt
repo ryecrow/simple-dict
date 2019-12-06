@@ -1,7 +1,6 @@
 package com.young.simpledict.ui.detail
 
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -36,8 +35,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
     private var mDictDetail: DictDetail? = null
     private var mSpeakersListener: SpeakersListener? = null
 
-    private var listener: OnFragmentInteractionListener? = null
-
     override fun onResume() {
         super.onResume()
         mSpeakersListener!!.register()
@@ -47,24 +44,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
         super.onPause()
         mSpeakersListener!!.stopPlaying()
         mSpeakersListener!!.unRegister()
-    }
-
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
     }
 
     override fun onCreateView(
@@ -113,7 +92,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
         }
 
         word.text = mDictDetail!!.word
-        if (mDictDetail!!.pinyin != null && mDictDetail!!.ukphonetic == null && mDictDetail!!.usphonetic == null) {
+        if (mDictDetail?.pinyin != null && mDictDetail?.ukphonetic == null && mDictDetail?.usphonetic == null) {
             //display only chinese
             Log.i(TAG, "display only chinese")
             engphonic.visibility = View.GONE
@@ -272,11 +251,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
         when (v.id) {
 
         }
-    }
-
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {

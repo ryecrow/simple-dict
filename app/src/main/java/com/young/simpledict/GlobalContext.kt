@@ -21,14 +21,14 @@ object GlobalContext {
     var application: Application?
         get() = sApplication.get()
         set(a) {
-            requireNotNull(a) { "parameter application can't be null" }
+            requireNotNull(a) { "Parameter application can't be null" }
             check(sApplication.getAndSet(a) == null) { "Application can only be set once" }
         }
 
     val applicationContext: Context?
         get() {
             val app = application
-            return app?.applicationContext
+            return app!!.applicationContext
         }
 
     private val sHttpRequestService = object : Singleton<HttpRequestService>() {

@@ -23,11 +23,11 @@ import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var mSearchBox: EditText = search_box
+    private var mSearchBox: EditText? = null
 
-    private var mSearchButton: Button = search_button
+    private var mSearchButton: Button? = null
 
-    internal var mWaitingProgressbar: ProgressBar = waiting_progressbar
+    internal var mWaitingProgressbar: ProgressBar? = null
 
     private val mProgressBarOperator = ProgressBarOperator()
 
@@ -37,11 +37,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dict_activity)
         setSupportActionBar(toolbar)
-        mSearchButton.setOnClickListener(this)
+        setView()
+        mSearchButton!!.setOnClickListener(this)
         mDictDetailFragment = DetailFragment()
         supportFragmentManager.beginTransaction()
             .add(R.id.dict_detail_fragment, mDictDetailFragment!!)
             .commit()
+    }
+
+    private fun setView() {
+        mSearchBox = search_box
+        mSearchButton = search_button
+        mWaitingProgressbar = waiting_progressbar
     }
 
     override fun onResume() {
@@ -59,7 +66,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.search_button -> {
                 val req = SearchWordRequest(
                     BaseEvent.EMPTY_EVENT_CODE,
-                    mSearchBox.text.toString(),
+                    mSearchBox!!.text.toString(),
                     DictAdapter.DICT_YOUDAO_DETAIL
                 )
                 EventBus.getDefault().post(req)
@@ -82,13 +89,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private var mLastShowTime: Long = 0
         private val mMainHandler = Handler(Looper.getMainLooper())
         private val mProgressBarCanceler = Runnable {
-            mWaitingProgressbar.visibility = View.INVISIBLE
+            mWaitingProgressbar!!.visibility = View.INVISIBLE
         }
 
         fun show() {
             mMainHandler.removeCallbacks(mProgressBarCanceler)
-            if (mWaitingProgressbar.visibility != View.VISIBLE) {
-                mWaitingProgressbar.visibility = View.VISIBLE
+            if (mWaitingProgressbar!!.visibility != View.VISIBLE) {
+                mWaitingProgressbar!!.visibility = View.VISIBLE
             }
             mLastShowTime = SystemClock.uptimeMillis()
         }
